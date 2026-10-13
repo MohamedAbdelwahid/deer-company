@@ -5,6 +5,7 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:deer_company/app.dart';
@@ -19,5 +20,21 @@ void main() {
     expect(find.text('التسويق الرقمي'), findsOneWidget);
     expect(find.text('واتساب'), findsOneWidget);
     expect(WhatsAppButton.chatUri.toString(), 'https://wa.me/201020501267');
+    expect(find.byTooltip('تحديث الصفحة'), findsOneWidget);
+  });
+
+  testWidgets('opens the mobile navigation menu', (tester) async {
+    tester.view.physicalSize = const Size(390, 844);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(const DeerCompanyApp());
+    await tester.tap(find.byTooltip('فتح القائمة'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('من نحن'), findsOneWidget);
+    expect(find.text('خدماتنا'), findsOneWidget);
+    expect(find.text('تواصل معنا'), findsOneWidget);
   });
 }

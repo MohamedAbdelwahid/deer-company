@@ -72,10 +72,11 @@ class ContactSection extends StatelessWidget {
                     if (constraints.maxWidth < 560) {
                       return const SizedBox(
                         height: 76,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             _FooterBrand(),
+                            SizedBox(height: 7),
                             Text(
                               '© 2026 DeeR Company',
                               style: AppTheme.footerNoteStyle,

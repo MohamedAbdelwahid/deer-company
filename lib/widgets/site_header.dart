@@ -3,27 +3,27 @@ import 'package:flutter/material.dart';
 import '../theme/app_colors.dart';
 import 'site_components.dart';
 
+enum _SiteMenuAction { home, about, services, approach, contact }
+
 class SiteHeader extends StatelessWidget {
   const SiteHeader({
     super.key,
     required this.isMobile,
-    required this.menuOpen,
-    required this.onMenuTap,
     required this.onHome,
     required this.onAbout,
     required this.onServices,
     required this.onApproach,
     required this.onContact,
+    required this.onRefresh,
   });
 
   final bool isMobile;
-  final bool menuOpen;
-  final VoidCallback onMenuTap;
   final VoidCallback onHome;
   final VoidCallback onAbout;
   final VoidCallback onServices;
   final VoidCallback onApproach;
   final VoidCallback onContact;
+  final VoidCallback onRefresh;
 
   @override
   Widget build(BuildContext context) {
@@ -38,14 +38,51 @@ class SiteHeader extends StatelessWidget {
                 children: [
                   const _Brand(),
                   const Spacer(),
+                  IconButton(
+                    onPressed: onRefresh,
+                    tooltip: 'تحديث الصفحة',
+                    icon: const Icon(
+                      Icons.refresh,
+                      color: AppColors.goldBright,
+                    ),
+                  ),
                   if (isMobile)
-                    IconButton(
-                      onPressed: onMenuTap,
-                      tooltip: menuOpen ? 'إغلاق القائمة' : 'فتح القائمة',
-                      icon: Icon(
-                        menuOpen ? Icons.close : Icons.menu,
-                        color: AppColors.goldBright,
+                    PopupMenuButton<_SiteMenuAction>(
+                      tooltip: 'فتح القائمة',
+                      position: PopupMenuPosition.under,
+                      color: AppColors.paper,
+                      surfaceTintColor: Colors.transparent,
+                      elevation: 10,
+                      constraints: const BoxConstraints(
+                        minWidth: 220,
+                        maxWidth: 280,
                       ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(14),
+                        side: const BorderSide(color: Color(0xFFE3D9CC)),
+                      ),
+                      icon: const Icon(Icons.menu, color: AppColors.goldBright),
+                      onSelected: (action) {
+                        switch (action) {
+                          case _SiteMenuAction.home:
+                            onHome();
+                          case _SiteMenuAction.about:
+                            onAbout();
+                          case _SiteMenuAction.services:
+                            onServices();
+                          case _SiteMenuAction.approach:
+                            onApproach();
+                          case _SiteMenuAction.contact:
+                            onContact();
+                        }
+                      },
+                      itemBuilder: (context) => [
+                        _menuItem(_SiteMenuAction.home, 'الرئيسية'),
+                        _menuItem(_SiteMenuAction.about, 'من نحن'),
+                        _menuItem(_SiteMenuAction.services, 'خدماتنا'),
+                        _menuItem(_SiteMenuAction.approach, 'رؤيتنا'),
+                        _menuItem(_SiteMenuAction.contact, 'تواصل معنا'),
+                      ],
                     )
                   else ...[
                     _NavLink(label: 'الرئيسية', onTap: onHome),
@@ -59,31 +96,29 @@ class SiteHeader extends StatelessWidget {
               ),
             ),
           ),
-          if (isMobile && menuOpen)
-            pageWidth(
-              Padding(
-                padding: const EdgeInsets.only(bottom: 18),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    _MobileNavLink(label: 'الرئيسية', onTap: onHome),
-                    _MobileNavLink(label: 'عن الشركة', onTap: onAbout),
-                    _MobileNavLink(label: 'خدماتنا', onTap: onServices),
-                    _MobileNavLink(label: 'رؤيتنا', onTap: onApproach),
-                    const SizedBox(height: 12),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: _OutlineNavButton(
-                        label: 'ابدأ مشروعك',
-                        onTap: onContact,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
           const Divider(height: 1, color: AppColors.dividerDark),
         ],
+      ),
+    );
+  }
+
+  PopupMenuItem<_SiteMenuAction> _menuItem(
+    _SiteMenuAction action,
+    String title,
+  ) {
+    return PopupMenuItem<_SiteMenuAction>(
+      value: action,
+      height: 48,
+      child: Align(
+        alignment: Alignment.centerRight,
+        child: Text(
+          title,
+          style: const TextStyle(
+            color: AppColors.ink,
+            fontSize: 15,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
       ),
     );
   }
@@ -184,25 +219,6 @@ class _NavLink extends StatelessWidget {
         foregroundColor: AppColors.navText,
         padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 12),
         textStyle: const TextStyle(fontSize: 13),
-      ),
-      child: Text(label),
-    );
-  }
-}
-
-class _MobileNavLink extends StatelessWidget {
-  const _MobileNavLink({required this.label, required this.onTap});
-  final String label;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: onTap,
-      style: TextButton.styleFrom(
-        alignment: Alignment.centerRight,
-        foregroundColor: AppColors.navText,
-        padding: const EdgeInsets.symmetric(vertical: 13),
       ),
       child: Text(label),
     );

@@ -52,21 +52,43 @@ class HeroSection extends StatelessWidget {
                       top: BorderSide(color: AppColors.dividerDark),
                     ),
                   ),
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'حلول إبداعية من مكان واحد',
-                        style: AppTheme.footerNoteStyle,
-                      ),
-                      Icon(
-                        Icons.keyboard_arrow_down,
-                        color: AppColors.goldBright,
-                        size: 20,
-                      ),
-                      Text('القاهرة · مصر', style: AppTheme.footerNoteStyle),
-                    ],
-                  ),
+                  child: isMobile
+                      ? const Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'حلول إبداعية',
+                              style: AppTheme.footerNoteStyle,
+                            ),
+                            Icon(
+                              Icons.keyboard_arrow_down,
+                              color: AppColors.goldBright,
+                              size: 20,
+                            ),
+                            Text(
+                              'القاهرة · مصر',
+                              style: AppTheme.footerNoteStyle,
+                            ),
+                          ],
+                        )
+                      : const Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'حلول إبداعية من مكان واحد',
+                              style: AppTheme.footerNoteStyle,
+                            ),
+                            Icon(
+                              Icons.keyboard_arrow_down,
+                              color: AppColors.goldBright,
+                              size: 20,
+                            ),
+                            Text(
+                              'القاهرة · مصر',
+                              style: AppTheme.footerNoteStyle,
+                            ),
+                          ],
+                        ),
                 ),
               ],
             ),
@@ -144,13 +166,18 @@ class HeroSection extends StatelessWidget {
           ],
         ),
         SizedBox(height: compact ? 28 : 55),
-        const Row(
+        Row(
           children: [
-            SizedBox(width: 34, child: Divider(color: AppColors.gold)),
-            SizedBox(width: 12),
-            Text(
-              'أفكار أذكى. جودة أدق. حضور أقوى.',
-              style: AppTheme.footerNoteStyle,
+            SizedBox(
+              width: compact ? 25 : 34,
+              child: const Divider(color: AppColors.gold),
+            ),
+            SizedBox(width: compact ? 8 : 12),
+            const Flexible(
+              child: Text(
+                'أفكار أذكى. جودة أدق. حضور أقوى.',
+                style: AppTheme.footerNoteStyle,
+              ),
             ),
           ],
         ),
@@ -174,9 +201,11 @@ class _Eyebrow extends StatelessWidget {
             child: Divider(color: AppColors.goldBright),
           ),
           const SizedBox(width: 10),
-          Text(
-            label,
-            style: const TextStyle(color: AppColors.goldBright, fontSize: 11),
+          Flexible(
+            child: Text(
+              label,
+              style: const TextStyle(color: AppColors.goldBright, fontSize: 11),
+            ),
           ),
         ],
       ),

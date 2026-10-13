@@ -7,6 +7,7 @@ import '../sections/hero_section.dart';
 import '../sections/services_section.dart';
 import '../widgets/site_header.dart';
 import '../widgets/whatsapp_button.dart';
+import '../services/page_reloader.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
@@ -21,10 +22,8 @@ class _LandingPageState extends State<LandingPage> {
   final _servicesKey = GlobalKey();
   final _approachKey = GlobalKey();
   final _contactKey = GlobalKey();
-  bool _menuOpen = false;
 
   Future<void> _jumpTo(GlobalKey key) async {
-    setState(() => _menuOpen = false);
     final target = key.currentContext;
     if (target == null) return;
     await Scrollable.ensureVisible(
@@ -48,13 +47,12 @@ class _LandingPageState extends State<LandingPage> {
               children: [
                 SiteHeader(
                   isMobile: isMobile,
-                  menuOpen: _menuOpen,
-                  onMenuTap: () => setState(() => _menuOpen = !_menuOpen),
                   onHome: () => _jumpTo(_homeKey),
                   onAbout: () => _jumpTo(_aboutKey),
                   onServices: () => _jumpTo(_servicesKey),
                   onApproach: () => _jumpTo(_approachKey),
                   onContact: () => _jumpTo(_contactKey),
+                  onRefresh: reloadPage,
                 ),
                 HeroSection(
                   key: _homeKey,

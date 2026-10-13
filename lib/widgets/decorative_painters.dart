@@ -13,7 +13,7 @@ class WavePainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeWidth = subtle ? 1 : 1.2;
     final center = Offset(size.width * 0.62, size.height * 0.45);
-    for (var i = 0; i < 14; i++) {
+    for (var i = 0; i < 9; i++) {
       final rect = Rect.fromCenter(
         center: center.translate(i * 4.0, i * 2.0),
         width: size.width * (0.82 + i * 0.045),
