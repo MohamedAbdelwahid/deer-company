@@ -24,3 +24,13 @@ flutter run -d chrome
 ```sh
 flutter build web
 ```
+
+## النشر على GitHub Pages
+
+يتم بناء ونشر الموقع تلقائيًا إلى GitHub Pages عند تحديث فرع `main` بواسطة
+سير عمل GitHub Actions. رابط الموقع:
+
+https://mohamedabdelwahid.github.io/deer-company/
+
+إذا كان هذا أول نشر للمستودع، اختر **GitHub Actions** كمصدر النشر من
+**Settings → Pages**.
