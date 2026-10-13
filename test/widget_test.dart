@@ -20,7 +20,8 @@ void main() {
     expect(find.text('التسويق الرقمي'), findsOneWidget);
     expect(find.text('واتساب'), findsOneWidget);
     expect(WhatsAppButton.chatUri.toString(), 'https://wa.me/201020501267');
-    expect(find.byTooltip('تحديث الصفحة'), findsOneWidget);
+    expect(find.byType(RefreshIndicator), findsOneWidget);
+    expect(find.byTooltip('تحديث الصفحة'), findsNothing);
   });
 
   testWidgets('opens the mobile navigation menu', (tester) async {
@@ -36,5 +37,20 @@ void main() {
     expect(find.text('من نحن'), findsOneWidget);
     expect(find.text('خدماتنا'), findsOneWidget);
     expect(find.text('تواصل معنا'), findsOneWidget);
+  });
+
+  testWidgets('supports pull-to-refresh from the top of the page', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(390, 844);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(const DeerCompanyApp());
+    await tester.drag(find.byType(SingleChildScrollView), const Offset(0, 360));
+    await tester.pumpAndSettle();
+
+    expect(find.byType(RefreshIndicator), findsOneWidget);
   });
 }

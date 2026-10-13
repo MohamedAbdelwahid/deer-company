@@ -5,9 +5,10 @@ import '../sections/approach_section.dart';
 import '../sections/contact_section.dart';
 import '../sections/hero_section.dart';
 import '../sections/services_section.dart';
+import '../services/page_reloader.dart';
+import '../theme/app_colors.dart';
 import '../widgets/site_header.dart';
 import '../widgets/whatsapp_button.dart';
-import '../services/page_reloader.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
@@ -42,38 +43,46 @@ class _LandingPageState extends State<LandingPage> {
         return Scaffold(
           floatingActionButton: const WhatsAppButton(),
           floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-          body: SingleChildScrollView(
-            child: Column(
-              children: [
-                SiteHeader(
-                  isMobile: isMobile,
-                  onHome: () => _jumpTo(_homeKey),
-                  onAbout: () => _jumpTo(_aboutKey),
-                  onServices: () => _jumpTo(_servicesKey),
-                  onApproach: () => _jumpTo(_approachKey),
-                  onContact: () => _jumpTo(_contactKey),
-                  onRefresh: reloadPage,
-                ),
-                HeroSection(
-                  key: _homeKey,
-                  isMobile: isMobile,
-                  onServices: () => _jumpTo(_servicesKey),
-                  onAbout: () => _jumpTo(_aboutKey),
-                ),
-                AboutSection(
-                  key: _aboutKey,
-                  onExplore: () => _jumpTo(_approachKey),
-                ),
-                ServicesSection(
-                  key: _servicesKey,
-                  onContact: () => _jumpTo(_contactKey),
-                ),
-                ApproachSection(key: _approachKey),
-                ContactSection(
-                  key: _contactKey,
-                  onServices: () => _jumpTo(_servicesKey),
-                ),
-              ],
+          body: RefreshIndicator(
+            onRefresh: refreshPage,
+            color: AppColors.goldBright,
+            backgroundColor: AppColors.ink,
+            displacement: 48,
+            child: SingleChildScrollView(
+              physics: const AlwaysScrollableScrollPhysics(
+                parent: ClampingScrollPhysics(),
+              ),
+              child: Column(
+                children: [
+                  SiteHeader(
+                    isMobile: isMobile,
+                    onHome: () => _jumpTo(_homeKey),
+                    onAbout: () => _jumpTo(_aboutKey),
+                    onServices: () => _jumpTo(_servicesKey),
+                    onApproach: () => _jumpTo(_approachKey),
+                    onContact: () => _jumpTo(_contactKey),
+                  ),
+                  HeroSection(
+                    key: _homeKey,
+                    isMobile: isMobile,
+                    onServices: () => _jumpTo(_servicesKey),
+                    onAbout: () => _jumpTo(_aboutKey),
+                  ),
+                  AboutSection(
+                    key: _aboutKey,
+                    onExplore: () => _jumpTo(_approachKey),
+                  ),
+                  ServicesSection(
+                    key: _servicesKey,
+                    onContact: () => _jumpTo(_contactKey),
+                  ),
+                  ApproachSection(key: _approachKey),
+                  ContactSection(
+                    key: _contactKey,
+                    onServices: () => _jumpTo(_servicesKey),
+                  ),
+                ],
+              ),
             ),
           ),
         );

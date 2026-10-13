@@ -14,7 +14,6 @@ class SiteHeader extends StatelessWidget {
     required this.onServices,
     required this.onApproach,
     required this.onContact,
-    required this.onRefresh,
   });
 
   final bool isMobile;
@@ -23,7 +22,6 @@ class SiteHeader extends StatelessWidget {
   final VoidCallback onServices;
   final VoidCallback onApproach;
   final VoidCallback onContact;
-  final VoidCallback onRefresh;
 
   @override
   Widget build(BuildContext context) {
@@ -38,14 +36,6 @@ class SiteHeader extends StatelessWidget {
                 children: [
                   const _Brand(),
                   const Spacer(),
-                  IconButton(
-                    onPressed: onRefresh,
-                    tooltip: 'تحديث الصفحة',
-                    icon: const Icon(
-                      Icons.refresh,
-                      color: AppColors.goldBright,
-                    ),
-                  ),
                   if (isMobile)
                     PopupMenuButton<_SiteMenuAction>(
                       tooltip: 'فتح القائمة',
