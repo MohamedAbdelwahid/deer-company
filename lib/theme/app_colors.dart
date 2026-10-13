@@ -1,0 +1,45 @@
+import 'package:flutter/material.dart';
+
+abstract final class AppColors {
+  static const ink = Color(0xFF1A1512);
+  static const paper = Color(0xFFF3EEE6);
+  static const paperDeep = Color(0xFFE9E0D4);
+  static const gold = Color(0xFFC38B4E);
+  static const goldBright = Color(0xFFD5A66F);
+  static const muted = Color(0xFF8A7D70);
+  static const dividerDark = Color(0x332D2824);
+  static const navText = Color(0xFFDED5CB);
+  static const goldBorder = Color(0x99C38B4E);
+  static const bodyOnDark = Color(0xFFBCB0A4);
+  static const footerNote = Color(0xFF93877C);
+  static const orbitBorder = Color(0x3AC38B4E);
+  static const orbitBorderSoft = Color(0x35D5A66F);
+  static const artTop = Color(0xFF31261E);
+  static const artBottom = Color(0xFF1C1613);
+  static const artFrame = Color(0x80D5A66F);
+  static const shadow = Color(0x44200000);
+  static const artCaption = Color(0xFFE5D9CA);
+  static const artIndex = Color(0xFFD8C6B2);
+  static const card = Color(0xFF29211C);
+  static const cardBorder = Color(0x44D5A66F);
+  static const cardShadow = Color(0x33000000);
+  static const subtleGoldBorder = Color(0x55D5A66F);
+  static const secondaryOnDark = Color(0xFFAA9D90);
+  static const bronze = Color(0xFF96734F);
+  static const bronzeAccent = Color(0xFF9C6E40);
+  static const bodyOnLight = Color(0xFF71665C);
+  static const stampBorder = Color(0x6696734F);
+  static const secondaryBody = Color(0xFFAB9E92);
+  static const indexMuted = Color(0xFF82766A);
+  static const serviceEnglish = Color(0xFF94714F);
+  static const moreCardText = Color(0xFFDED2C4);
+  static const lightDivider = Color(0x2653281D);
+  static const bodyMuted = Color(0xFF776B60);
+  static const contactText = Color(0xFFB5A99D);
+  static const footerBrand = Color(0xFFAE9D8B);
+  static const sectionMuted = Color(0xFFB5A494);
+  static const buttonBrown = Color(0xFF79532F);
+  static const buttonBorder = Color(0x6679532F);
+  static const subtleGoldBorderStrong = Color(0x55C38B4E);
+  static const goldBorderStrong = Color(0x88D5A66F);
+}
